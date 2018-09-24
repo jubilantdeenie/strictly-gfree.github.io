@@ -1,8 +1,30 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
-import Map from './components/Map.js'
+import Map from './components/Map.js';
+import SearchPlaces from './components/SearchPlaces.js';
+import Header from './components/Header.js';
+import Footer from './components/Footer.js';
+import * as MapDataAPI from './MapDataAPI.js';
+
 class App extends Component {
+ 
+  state = {
+    locations: [],
+    originalLocations: [],
+    selectedLocation:{},
+    newCenter: {lat: , lng: },
+    isOpen: false,
+    defaultCenter : {lat: , lng: },
+    showInfoIndex: -1,
+    markerIcon: {},
+    defaultMarkerIcon: {},
+    zoom: 17, 
+    defaultZoom: 15,
+    selectedColorBlack: true,
+    menuHidden: true
+  }
+ 
+ 
   render() {
     return (
       <div className="App">
@@ -19,6 +41,30 @@ export default App;
 
 {
   /*
+
+import React, { Component } from 'react';
+import logo from './logo.svg';
+import './App.css';
+import Map from './components/Map.js'
+
+  class App extends Component {
+  render() {
+    return (
+      <div className="App">
+        <header className="App-header">
+          <img src={logo} className="App-logo" alt="logo" />
+          <h1 className="App-title">Welcome to React</h1>
+        </header>
+        <Map/>
+      </div>
+    );
+  }
+}
+export default App;
+
+  ///////////
+
+
   <App>
   state = {
     locationsArr: [],
