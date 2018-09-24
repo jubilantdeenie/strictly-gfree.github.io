@@ -43,6 +43,8 @@ class SeachPlaces extends Component {
             this.setState({locationsSearchResult: result.filteredLocations})
         }
 
+    }
+
     render() {
         let { locations, onUserDidSearch, onhandleLocationSelected, onItemClick, color}
         let { query, locationsSearchResult} = this.state

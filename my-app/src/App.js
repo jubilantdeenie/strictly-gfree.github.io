@@ -12,9 +12,9 @@ class App extends Component {
     locations: [],
     originalLocations: [],
     selectedLocation:{},
-    newCenter: {lat: , lng: },
+    newCenter: {lat: 45.5122308, lng: -122.6587185},
     isOpen: false,
-    defaultCenter : {lat: , lng: },
+    defaultCenter : {lat: 45.5122308, lng: -122.6587185},
     showInfoIndex: -1,
     markerIcon: {},
     defaultMarkerIcon: {},
@@ -24,15 +24,35 @@ class App extends Component {
     menuHidden: true
   }
  
+  componentWillMount() {
+    let icon = {
+      url: 'http://maps.gstatic.com/mapfiles/markers2/boost-marker-mapview.png'
+    }
+    this.setState({
+      makerIcon: icon,
+      defaultMarkerIcon: icon
+    })
+  }
  
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <Map/>
+      <div>
+        <Nav
+          openNav={this.openNav}
+          closeNave={this.closeNav}
+          places={this.state.places}
+        />
+        <Map
+         places={this.state.places}
+         googleMapURL="https://maps.googleapis.com/maps/api/geocode/json?address=PORTLAND,+OR&key=AIzaSyACxrm7b9GlF8v5fcTtl-VkSxXlM9Y5BcE"
+         loadingElement={<div style={{ height: '100%' }} />}
+         containerElement={<div style={{height: '800px' }} />}
+         mapElement={<div style={{ height: '100%'}} />}
+         isOpen={this.state.isOpen}
+         selectedMarkerId= {this.state.selectedMarkerId}
+         onToggleClass={this.onToggleOpen}
+         onToggleClass={this.onToggleClose}
+        />
       </div>
     );
   }
