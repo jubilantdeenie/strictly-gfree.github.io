@@ -32,8 +32,89 @@ class App extends Component {
       makerIcon: icon,
       defaultMarkerIcon: icon
     })
+  
+  function handleErrors(response) {
+    if (!response.ok) {
+      throw Error(response.statusText);
+    }
+    return response;
   }
- 
+    MapDataAPI.getLocationsAll()
+      .then((locations) => {
+        this.setState({locations})
+        this.setState({originalLocations: locations})
+      }).catch((error) => {
+        alert('Error while getting all locations data from FourSquare API')
+        console.log('Error while getting all locations')
+      })
+}
+
+  updateLocations = (seachResultArr, query) => {
+    if(query) {
+      this.setState((state) => ({
+    locations: searchResultArr
+      }))
+    }else {
+      this.setState({locations: this.state.originalLocations})
+    }
+  }
+
+  handleLocationsSelected = (event, location, index) => {
+    if(event.key === 'Enter') {
+      let newCenter = {lat: 45.5122308, lng: -122.6587185}
+      if(location !==undefined && location.location !==undefined) {
+         newCenter = {lat: location.location.lat, lng: location.location.lng}
+    }
+    this.handleMarkerClicked(event, this.state.newCenter, index)
+    }
+  }
+
+  setNewCenter = (location) => {
+    if(location !== undefined && location.location !== undefined) {
+      newCenter = {lat: location.location.lat, lng: location.location.lng}
+    }
+    this.setState({
+      newCenter: newCenter
+    })
+  }
+
+  handleLocationItemClick = (event, location, index) => {
+    let newCenter = {}
+    if(location != undefined && location.location !== undefined) {
+        newCenter = {lat: location.location.lat, lng: location.location.lng}
+    }
+    this.handleMakerClicked(event, newCenter, index)
+  }
+
+  handleShowInfo = (index) => {
+    this.setState({
+      isOpen : !this.state.isOpen,
+      showInfoIndex: index
+    })
+  }
+
+  handleMarkerClicked = () => {
+
+  }
+
+  resetCenter = () => {
+    
+  }
+
+  handleToggleOpen = () => {
+    
+  }
+
+  handleNavMenuToggle = () => {
+    
+  }
+
+  changeLocationColor = () => {
+    
+  }
+
+
+
   render() {
     return (
       <div>
